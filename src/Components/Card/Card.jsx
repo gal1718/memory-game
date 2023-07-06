@@ -3,8 +3,9 @@ import { purple } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import "../Card/Card.css";
 
-const Card = ({ card, handleCardClick }) => {
+const Card = ({ card, handleCardClick, children }) => {
 
+  console.log("children " + children)
   console.log("card " + JSON.stringify(card))
 
   return (

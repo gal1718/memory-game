@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import "../Board/Board.css";
 import Grid from "@mui/material/Grid"; // Import Grid from @mui/material
 import {Skeleton } from "@mui/material";
+import Scores from "../Scores/Scores";
 
 const Board = ({ cards, setCards, setGameOver, setWinner }) => {
   // console.log("Board comp rendereed ");
@@ -116,11 +117,8 @@ const Board = ({ cards, setCards, setGameOver, setWinner }) => {
   return (
     
     <div>
-      <div>
-        <h1>USER {user1Turn ? "1" : "2"} Turn </h1>
-        <h2>User 1 score: {user1Score.current} </h2>
-        <h2>User 2 score: {user2Score.current}</h2>
-      </div>
+      
+      <Scores user1Turn={user1Turn} user1Score={user1Score} user2Score={user2Score} />
 
       <Box>
         <Grid

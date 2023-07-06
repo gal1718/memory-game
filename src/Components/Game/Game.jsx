@@ -6,12 +6,11 @@ import hamster from "../../images/hamster.jpg";
 import pilot_ant from "../../images/pilot_ant.jpg";
 import big_foot from "../../images/big_foot.jpg";
 import Board from "../Board/Board";
-import {Button, Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 
 
 const imagesSrcs = [pizza, foxes, shoe_tree, hamster, pilot_ant, big_foot];
 //const imagesSrcs = [pizza, foxes, shoe_tree];
-
 
 const shuffleArray = (array) => {
   const doubledArray = array.flatMap((item) => [
@@ -31,10 +30,9 @@ const Game = () => {
   const [winner, setWinner] = useState("");
 
   useEffect(() => {
-
-    const page = Math.floor((Math.random()*5000) + 1)
-    const Access_Key = 'qOyQFNo2zuQS4EfcCejQ2KyekJFjt6eRNFm8S36rAZg'
-    
+    const page = Math.floor(Math.random() * 5000 + 1);
+    const Access_Key = "qOyQFNo2zuQS4EfcCejQ2KyekJFjt6eRNFm8S36rAZg";
+    //try{
     // fetch(`https://api.unsplash.com/search/photos?page=12&query=cactus&client_id=${Access_Key}`)
     //   .then(response => response.json())
     //   .then(data => {
@@ -49,20 +47,23 @@ const Game = () => {
     //     }));
     //     setCards(finalCards);
     //   })
-            const randomIndexesArray = shuffleArray(imagesSrcs);
-        const finalCards = randomIndexesArray.map((item, index) => ({
-          ...item,
-          index,
-        }));
-        // setTimeout(()=> {
-        //   setCards(finalCards);
-        // },2000)
 
-        setCards(finalCards);
-      // console.log("AA2AA")
+    // }
+
+    const randomIndexesArray = shuffleArray(imagesSrcs);
+    const finalCards = randomIndexesArray.map((item, index) => ({
+      ...item,
+      index,
+    }));
+    // setTimeout(()=> {
+    //   setCards(finalCards);
+    // },2000)
+
+    setCards(finalCards);
+    console.log("AA2AA");
   }, [gameOver]);
 
-  const handleGameOver = () => {
+  const handlnewGame = () => {
     setGameOver(false);
     setWinner("");
   };
@@ -78,6 +79,7 @@ const Game = () => {
       className="Game"
     >
       <Container>
+      
         {!gameOver && (
           <Board
             cards={cards}
@@ -90,7 +92,7 @@ const Game = () => {
           <Button
             size="larger"
             variant="contained"
-            onClick={() => handleGameOver()}
+            onClick={() => handlnewGame()}
           >
             New Game
           </Button>
