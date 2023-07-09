@@ -1,32 +1,30 @@
-import { colors } from "@mui/material";
-import { purple } from "@mui/material/colors";
-import { useEffect, useState } from "react";
-import "../Card/Card.css";
+import { useSpring, animated } from "@react-spring/web";
 
-const Card = ({ card, handleCardClick, children }) => {
-
-  console.log("children " + children)
-  console.log("card " + JSON.stringify(card))
+const Card = ({ card, handleCardClick }) => {
+  const flipp = useSpring({
+    width: "150px",
+    height: "150px",
+    transition: "all 0.5s ease",
+    opacity: card.status === "Inactive Unmatch" ? 0 : 1,
+    config: { mass: 5, tension: 500, friction: 80 },
+  });
 
   return (
-    <div className="cardContainer" onClick={() => handleCardClick(card)}>
-      <div
-        className={`card ${
-          card.status == "Active Unmatch" || card.status == "Inactive Match"
-            ? "cardflipp"
-            : ""
-        }`}
-      >
-        <div className="front cardDiv"></div>
-
-        <div className="back cardDiv" />
-        <img
-          width="100%"
-          height="100%"
-          style={{ borderRadius: "10px" }}
-          src={card.src}
-        ></img>
-      </div>
+    <div
+      style={{
+        border: "2px solid white",
+        borderRadius: "6px",
+        backgroundColor: "purple",
+        height: "150px",
+      }}
+      className="Card"
+    >
+      <animated.img
+        src={card.src}
+        alt="Card"
+        onClick={() => handleCardClick(card)}
+        style={flipp}
+      />
     </div>
   );
 };

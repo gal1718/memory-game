@@ -9,6 +9,7 @@ import Board from "../Board/Board";
 import { Button, Container } from "@mui/material";
 
 
+
 const imagesSrcs = [pizza, foxes, shoe_tree, hamster, pilot_ant, big_foot];
 //const imagesSrcs = [pizza, foxes, shoe_tree];
 
@@ -60,7 +61,6 @@ const Game = () => {
     // },2000)
 
     setCards(finalCards);
-    console.log("AA2AA");
   }, [gameOver]);
 
   const handlnewGame = () => {
@@ -73,8 +73,8 @@ const Game = () => {
       style={{
         display: "flex",
         justifyContent: "center",
-        width: "70%",
-        height: "100vh",
+        width: "50%",
+        marginTop: "5%"
       }}
       className="Game"
     >
@@ -88,6 +88,7 @@ const Game = () => {
             setWinner={setWinner}
           ></Board>
         )}
+        <div>
         {gameOver && (
           <Button
             size="larger"
@@ -97,7 +98,8 @@ const Game = () => {
             New Game
           </Button>
         )}
-        {winner && <h1>The winner is {winner}</h1>}
+        {winner && (winner != 'Tie' ? <h1>The winner is {winner}</h1> : <h1>It's a Tie</h1>)}
+        </div>
       </Container>
     </div>
   );

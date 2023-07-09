@@ -1,13 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Card from "../Card/Card";
-import Box from "@mui/material/Box";
 import "../Board/Board.css";
-import Grid from "@mui/material/Grid"; // Import Grid from @mui/material
-import {Skeleton } from "@mui/material";
 import Scores from "../Scores/Scores";
 
 const Board = ({ cards, setCards, setGameOver, setWinner }) => {
-  // console.log("Board comp rendereed ");
   const [user1Turn, setUser1Turn] = useState(true);
   const user1Score = useRef(0);
   const user2Score = useRef(0);
@@ -15,17 +11,10 @@ const Board = ({ cards, setCards, setGameOver, setWinner }) => {
   const [previousCard, setPreviousCard] = useState();
 
   const checkMatch = (card1, card2) => {
-    if (card1.src != card2.src) {
-      return false;
-    } else {
-      return true;
-    }
+    return card1.src == card2.src
   };
 
   const handleCardClick = (selectedCard) => {
-    debugger
-    console.log("selected card: " + JSON.stringify(selectedCard) + " previous: " + JSON.stringify(previousCard))
-   // debugger
     if (previousCard && selectedCard.index == previousCard.index) {
       alert("Card already selected");
       return;
@@ -37,19 +26,21 @@ const Board = ({ cards, setCards, setGameOver, setWinner }) => {
 
     stepsCounter.current += 1;
     if (stepsCounter.current == 1) {
-      console.log("first selection selectedCard index " + JSON.stringify(selectedCard))
+      console.log(
+        "first selection selectedCard index " + JSON.stringify(selectedCard)
+      );
       //First selection
       const newCards = cards.map((card) => {
         if (card.index != selectedCard.index) return card;
         else return { ...selectedCard, status: "Active Unmatch" };
       });
-      console.log("first selection new cards: " + JSON.stringify(newCards))
+      console.log("first selection new cards: " + JSON.stringify(newCards));
       setCards(newCards);
       setPreviousCard(selectedCard);
     }
     if (stepsCounter.current == 2) {
       //Second selection
-      console.log("second selection ")
+      console.log("second selection ");
       const newCards = cards.map((card) => {
         if (card.index != selectedCard.index) return card;
         else return { ...selectedCard, status: "Active Unmatch" };
@@ -115,23 +106,26 @@ const Board = ({ cards, setCards, setGameOver, setWinner }) => {
   };
 
   return (
-    
     <div>
-      
-      <Scores user1Turn={user1Turn} user1Score={user1Score} user2Score={user2Score} />
+      <Scores
+        user1Turn={user1Turn}
+        user1Score={user1Score}
+        user2Score={user2Score}
+      />
 
-      <Box>
-        <Grid
-          container
-          spacing={{ xs: 2, sm: 2, md: 2 }}
-        >
-          {cards.map((card, index) => (
-            <Grid key={index} item xs={4} sm={3} md={3}>
-              <Card card={card} handleCardClick={handleCardClick} />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "15px",
+        }}
+        className="Container"
+      >
+        {cards.map((card, index) => (
+          <Card key={index} card={card} handleCardClick={handleCardClick} />
+        ))}
+      </div>
     </div>
   );
 };
